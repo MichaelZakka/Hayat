@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 52 52">
+  <g id="Group_55044" data-name="Group 55044" transform="translate(-71 -407.5)">
+    <rect id="Rectangle_17139" data-name="Rectangle 17139" width="50" height="50" rx="25" transform="translate(72 408.5)" fill="#296896" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/>
+    <path id="envelope_1_" data-name="envelope (1)" d="M16.818,1H5A5.005,5.005,0,0,0,0,6V16a5.005,5.005,0,0,0,5,5H16.818a5.005,5.005,0,0,0,5-5V6A5.005,5.005,0,0,0,16.818,1Zm0,2.727a2.251,2.251,0,0,1,1.494.574L12.4,10.21a2.157,2.157,0,0,1-2.98,0L3.514,4.3A2.251,2.251,0,0,1,5,3.727Zm0,14.545H5A2.273,2.273,0,0,1,2.727,16V7.379L7.49,12.142a4.834,4.834,0,0,0,6.837,0l4.764-4.763V16A2.273,2.273,0,0,1,16.818,18.273Z" transform="translate(86 422)" fill="#fadf4a"/>
+  </g>
+</svg>

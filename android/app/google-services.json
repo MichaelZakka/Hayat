@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "697289806380",
+    "project_id": "hayat-423512",
+    "storage_bucket": "hayat-423512.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697289806380:android:804cd1d21b39280501f789",
+        "android_client_info": {
+          "package_name": "com.example.hayat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "697289806380-vlint868chi1nctdosm67ej6ha1b4b3m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hayat",
+            "certificate_hash": "25ff9c53a5fff77ace1bd4a5fef7f78b9f8569d1"
+          }
+        },
+        {
+          "client_id": "697289806380-pv8s7g4l5qi79s2lj97gjrbsoe9b6m1r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTo978JyhZ-_2IgG3mQ9IqtQ-uRus3wIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "697289806380-o512idngep3mpn5dod71njk7tdp9qjuv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "697289806380-nt205ct6lof85rdb1ja6557cr29e8p4h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hayat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
