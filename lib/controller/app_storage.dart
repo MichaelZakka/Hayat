@@ -5,16 +5,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AppStorage {
   static String? token;
+  static bool? notifications;
+
   static saveToken(String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
   }
 
   static removeToken() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.remove('token');
-}
-
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('token');
+  }
 
   static getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -51,6 +52,16 @@ class AppStorage {
   static Future<void> setAuthState(bool isAuthenticated) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isAuthenticated', isAuthenticated);
+  }
+
+  static Future<void> setNotificationState(bool notification) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('Notification', notification);
+  }
+
+  static Future<bool> getNotificationState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('Notification') ?? false;
   }
 
   static Future<bool> getAuthState() async {

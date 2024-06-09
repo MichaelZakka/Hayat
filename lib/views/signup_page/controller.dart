@@ -23,20 +23,41 @@ class SignupController extends GetxController {
 
   RxBool isAgreed = false.obs;
 
-  void agreeAction(){
+  void agreeAction() {
     isAgreed.toggle();
     update();
   }
 
-  
-  SignupWithGoogle(){
-    try{
-      authRepo.signInWithGoogle().then((value){
+  SignupWithGoogle() {
+    try {
+      authRepo.signInWithGoogle().then((value) async {
         print(value);
-      });
-    }catch(e){print(e);}
-  }
+        // if (value.status == 200) {
+        //   print(value.message);
+          // authRepo.signInWithGoogle().then((value) async {
+          // if (value.message == 'You have logged in successfully') {
+          //   AppStorage.token = value.data["token"];
+          //   await AppStorage.saveUserData(LoginResponse(
+          //       user: User.fromJson(value.data["user"]),
+          //       token: value.data["token"]));
+          //   initController.userData =
+          //       await AppStorage.getUserInfoFromSharedPreferences() ??
+          //           LoginResponse(token: '');
+          //   print(AppStorage.token);
 
+          //   isLoading();
+
+          //   Get.offAllNamed('/mainPage');
+          // }
+          //   }
+          // });
+          // isLoading();
+        // }
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   isLoading() {
     loading.toggle();

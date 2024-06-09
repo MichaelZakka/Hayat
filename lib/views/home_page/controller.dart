@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:hayat/controller/app_storage.dart';
 import 'package:hayat/controller/init_controller.dart';
 import 'package:hayat/data/models/response/delete_account_reason_response.dart';
+import 'package:hayat/data/models/response/login_response.dart';
 import 'package:hayat/data/repository/account_repo.dart';
 import 'package:hayat/views/by_letters_page/controller.dart';
 import 'package:hayat/views/color_page/controller.dart';
@@ -25,15 +26,24 @@ class HomePageController extends GetxController {
   getDeleteReason() {
     accountRepo.getDeleteAccountReasons().then((value) {
       if (value.status == 200) {
-        print('reasons');
         reasons = DeleteAccountReasonResponse.fromJson(value.data);
-        print(reasons.data![0].reason);
       }
     });
   }
 
+  LoginResponse? userData = LoginResponse();
+  updateUserInfo(String full_name, String mobile_number) async {
+    userData!.user!.fullName = full_name;
+    userData!.user!.mobileNumber = mobile_number;
+    print(userData!.user!.fullName);
+    print(userData!.user!.mobileNumber);
+    print("userData!.user!.mobileNumber");
+    update();
+    return userData;
+  }
+
   @override
-  void onInit()async {
+  void onInit() async {
     colorController.getAllPlantsRequest('1', null, null);
     byLettersController.getPlantsByLetterRequest('1');
     feedsController.getAllpostsRequest('1');
@@ -42,12 +52,12 @@ class HomePageController extends GetxController {
     myQuestionsController.getMyQuestionsRequest('1');
     initController.getInitialData();
     getDeleteReason();
-    var userData = await AppStorage.getUserInfoFromSharedPreferences();
-    print('=============================');
-    print(await AppStorage.getToken());
-    print('onInitHomeController');
+    userData = await AppStorage.getUserInfoFromSharedPreferences();
+    print('userData!.user!.fullName');
+    print('userData!.user!.fullName');
     print(userData!.user!.fullName);
-    print('=============================');
+    print('userData!.user!.fullName');
+    print('userData!.user!.fullName');
     super.onInit();
   }
 }

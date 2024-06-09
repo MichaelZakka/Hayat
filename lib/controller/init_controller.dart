@@ -168,9 +168,16 @@ class InitController extends GetxController {
     }
   }
 
+  updateUserInfo(String fullName, String mobileNumber) {
+    userData!.user!.fullName = fullName;
+    userData!.user!.mobileNumber = mobileNumber;
+    update();
+  }
+
   @override
   void onInit() async {
     getInitialData();
+    print(await AppStorage.getToken());
     updateToken();
 
     super.onInit();

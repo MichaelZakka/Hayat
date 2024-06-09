@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:hayat/controller/app_storage.dart';
 import 'package:hayat/controller/init_controller.dart';
 import 'package:hayat/res/app_images.dart';
 import 'package:hayat/res/colors.dart';
@@ -10,6 +11,7 @@ import 'package:hayat/res/styles.dart';
 import 'package:hayat/views/account_page/controller.dart';
 import 'package:hayat/views/account_page/widgets/custom_listtile.dart';
 import 'package:hayat/views/edit_account/controller.dart';
+import 'package:hayat/views/home_page/controller.dart';
 
 class AccountPage extends StatelessWidget {
   AccountPage({super.key});
@@ -39,7 +41,7 @@ class AccountPage extends StatelessWidget {
                     SizedBox(
                       height: Get.height * 0.085,
                     ),
-                    GetBuilder<AccountController>(builder: (_) {
+                    GetBuilder<HomePageController>(builder: (_) {
                       return Container(
                         width: Get.width * 0.86,
                         // height: Get.height * 0.4,
@@ -59,7 +61,7 @@ class AccountPage extends StatelessWidget {
                             SizedBox(
                               width: Get.width * 0.5,
                               child: Text(
-                                '${initController.userData!.user!.fullName}',
+                                '${_.userData!.user!.fullName}',
                                 textAlign: TextAlign.center,
                                 style: largetext2,
                               ),
@@ -68,7 +70,7 @@ class AccountPage extends StatelessWidget {
                             SizedBox(
                               width: Get.width * 0.5,
                               child: Text(
-                                '${initController.userData!.user!.email}',
+                                '${_.userData!.user!.email}',
                                 textAlign: TextAlign.center,
                                 style: mediumtext,
                               ),
@@ -77,7 +79,7 @@ class AccountPage extends StatelessWidget {
                             SizedBox(
                               width: Get.width * 0.5,
                               child: Text(
-                                '${initController.userData!.user!.mobileNumber}',
+                                '${_.userData!.user!.mobileNumber}',
                                 textAlign: TextAlign.center,
                                 style: mediumtext,
                               ),
@@ -109,8 +111,10 @@ class AccountPage extends StatelessWidget {
                           return CupertinoSwitch(
                             activeColor: blue1,
                             value: (_.notification.value),
-                            onChanged: (newvalue) {
+                            onChanged: (newvalue) async {
                               _.switchNotification();
+                              await AppStorage.setNotificationState(
+                                  _.notification.value);
                             },
                           );
                         })

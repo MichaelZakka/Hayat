@@ -46,10 +46,11 @@ dependencies:
   flutter_screenutil: ^5.9.1
   firebase_core: ^2.31.1
   google_sign_in: ^6.2.1
-  the_apple_sign_in: ^1.1.1
+  sign_in_with_apple: ^6.1.0
   firebase_auth: ^4.19.6
   firebase_messaging: ^14.9.4
   flutter_local_notifications: ^17.1.2
+  firebase_analytics: ^10.4.2
 
 
 

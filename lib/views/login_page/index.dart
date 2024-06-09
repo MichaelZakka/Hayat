@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:hayat/controller/app_storage.dart';
 import 'package:hayat/res/app_images.dart';
 import 'package:hayat/res/colors.dart';
 import 'package:hayat/res/styles.dart';
@@ -141,7 +140,6 @@ class LoginPage extends StatelessWidget {
                               print(e);
                             }
                           }
-                          print(AppStorage.token);
                         },
                       ),
                       SizedBox(
@@ -170,6 +168,7 @@ class LoginPage extends StatelessWidget {
                       ),
                       AuthPlatformButton(
                           ontap: () async {
+                            _.isLoading();
                             _.loginWithGoogle();
 
                           },

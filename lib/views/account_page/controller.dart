@@ -7,7 +7,7 @@ import 'package:hayat/widgets/popup/custom_popup.dart';
 
 class AccountController extends GetxController {
   AccountRepo accountRepo = AccountRepo();
-  RxBool notification = false.obs;
+  RxBool notification = true.obs;
   InitController initController = Get.put(InitController());
 
   switchNotification() {
@@ -49,5 +49,11 @@ class AccountController extends GetxController {
         },
       ),
     );
+  }
+
+  @override
+  void onInit() async {
+    notification.value = await AppStorage.getNotificationState();
+    super.onInit();
   }
 }

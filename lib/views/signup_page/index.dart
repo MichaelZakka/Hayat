@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hayat/res/app_images.dart';
 import 'package:hayat/res/colors.dart';
 import 'package:hayat/res/styles.dart';
+import 'package:hayat/views/login_page/controller.dart';
 import 'package:hayat/views/signup_page/controller.dart';
 import 'package:hayat/widgets/appbar/custom_appbar.dart';
 import 'package:hayat/widgets/buttons/auth_custom_botton.dart';
@@ -225,15 +226,20 @@ class SignupPage extends StatelessWidget {
                                   text: '     Continue With Apple',
                                   route: '/platformsignupPage'),
                               SizedBox(height: Get.height * 0.021),
-                               AuthPlatformButton(
-                                  ontap: () {
-                                    _.SignupWithGoogle();
-                                  },
-                                  icon: GOOGLE_ICON,
-                                  containercolor: Colors.white,
-                                  textcolor: Colors.black,
-                                  text: '     Continue With Google',
-                                  route: '/platformsignupPage'),
+                               GetBuilder<LoginController>(
+                                 builder: (context) {
+                                   return AuthPlatformButton(
+                                      ontap: () {
+                                        context.isLoading();
+                                        context.loginWithGoogle();
+                                      },
+                                      icon: GOOGLE_ICON,
+                                      containercolor: Colors.white,
+                                      textcolor: Colors.black,
+                                      text: '     Continue With Google',
+                                      route: '/platformsignupPage');
+                                 }
+                               ),
                               SizedBox(height: Get.height * 0.034),
                               Container(
                                 alignment: Alignment.center,

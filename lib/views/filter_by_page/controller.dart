@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 class FilterByController extends GetxController {
   String? value = '';
 
-  List<String> duration = ['All', 'Annual', 'Perennial', 'Biennial'];
+  List<String> duration = ['All', 'Annual', 'Perennial'];
   List<String> cotyledon =  ['All', 'Monocotyledon', 'Dicotyledon'];
   List<String> native =  ['All', 'Native', 'Weed', 'Cultivated'];
 
