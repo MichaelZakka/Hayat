@@ -24,6 +24,7 @@ import 'package:hayat/data/repository/trips_repo.dart';
 import 'package:hayat/res/colors.dart';
 import 'package:hayat/res/styles.dart';
 
+
 class InitController extends GetxController {
   LoginResponse? userData = LoginResponse();
   PageRepo pageRepo = PageRepo();
@@ -177,8 +178,9 @@ class InitController extends GetxController {
   @override
   void onInit() async {
     getInitialData();
-    print(await AppStorage.getToken());
     updateToken();
+    print('await AppStorage.getToken()');
+    print(await AppStorage.getToken());
 
     super.onInit();
   }

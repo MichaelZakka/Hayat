@@ -6,6 +6,7 @@ import 'package:hayat/res/app_images.dart';
 import 'package:hayat/res/colors.dart';
 import 'package:hayat/res/styles.dart';
 import 'package:hayat/views/feeds_page/controller.dart';
+import 'package:hayat/views/feeds_page/widgets/post_widget.dart';
 import 'package:hayat/widgets/buttons/circle_button.dart';
 
 class FeedsPage extends StatelessWidget {
@@ -47,22 +48,22 @@ class FeedsPage extends StatelessWidget {
                       : SizedBox(
                           height: Get.height,
                           width: Get.width * 0.86,
-                          // child: ListView.builder(
-                          //   controller: _.scrollController,
-                          //   itemCount: _.feeds.data!.length,
-                          //   itemBuilder: (context, index) {
-                          //     return Padding(
-                          //       padding:
-                          //           const EdgeInsets.symmetric(vertical: 10),
-                          //       child: PostWidget(
-                          //         postResponse: _.feeds.data![index],
-                          //         color: _.feeds.data![index].likedByMe == 1
-                          //             ? blue1
-                          //             : Colors.grey,
-                          //       ),
-                          //     );
-                          //   },
-                          // ),
+                          child: ListView.builder(
+                            controller: _.scrollController,
+                            itemCount: _.feeds.data!.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                child: PostWidget(
+                                  postResponse: _.feeds.data![index],
+                                  color: _.feeds.data![index].likedByMe == 1
+                                      ? blue1
+                                      : Colors.grey,
+                                ),
+                              );
+                            },
+                          ),
                         )
                   : Center(
                       child: CircularProgressIndicator(

@@ -7,6 +7,7 @@ const String SIGN_UP = '$baseUrl/api/signup';
 const String LOG_OUT = '$baseUrl/api/logout';
 const String UPDATE_TOKEN = '$baseUrl/api/user/update-token';
 const String UPDATE_USER = '$baseUrl/api/user/update-account';
+const String APPLE_SIGNUP = '$baseUrl/api/apple-login';
 const String DELETE_ACCOUNT = '$baseUrl/api/user/delete-account';
 const String GOOGLE_SIGNUP = '$baseUrl/api/google-login';
 

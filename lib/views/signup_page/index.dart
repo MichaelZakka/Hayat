@@ -144,7 +144,7 @@ class SignupPage extends StatelessWidget {
                                         },
                                       ),
                                       Text(
-                                        'By continueing You agree to Hayat ',
+                                        'By continuing You agree to Hayat ',
                                         style: smalltext1,
                                       ),
                                     ],
@@ -218,28 +218,43 @@ class SignupPage extends StatelessWidget {
                                   child:
                                       Text('Signup with', style: mediumtext)),
                               SizedBox(height: Get.height * 0.02),
-                              AuthPlatformButton(
-                                  ontap: () {},
-                                  icon: APPLE_ICON,
-                                  containercolor: Colors.black,
-                                  textcolor: Colors.white,
-                                  text: '     Continue With Apple',
-                                  route: '/platformsignupPage'),
+                              GetBuilder<SignupController>(builder: (_) {
+                                return GetBuilder<LoginController>(
+                                  builder: (context) {
+                                    return AuthPlatformButton(
+                                        ontap: () {
+                                          if(_.isAgreed.value){
+                                            _.isLoading();
+                                            _.loginWithApple();
+                                          }
+                                        },
+                                        icon: APPLE_ICON,
+                                        containercolor: _.isAgreed.value
+                                            ? Colors.black
+                                            : Colors.grey,
+                                        textcolor: Colors.white,
+                                        text: '     Continue With Apple',
+                                        route: '/platformsignupPage');
+                                  }
+                                );
+                              }),
                               SizedBox(height: Get.height * 0.021),
-                               GetBuilder<LoginController>(
-                                 builder: (context) {
-                                   return AuthPlatformButton(
-                                      ontap: () {
-                                        context.isLoading();
-                                        context.loginWithGoogle();
-                                      },
-                                      icon: GOOGLE_ICON,
-                                      containercolor: Colors.white,
-                                      textcolor: Colors.black,
-                                      text: '     Continue With Google',
-                                      route: '/platformsignupPage');
-                                 }
-                               ),
+                              GetBuilder<SignupController>(builder: (_) {
+                                return AuthPlatformButton(
+                                    ontap: () {
+                                      if (_.isAgreed.value) {
+                                        _.isLoading();
+                                        _.SignupWithGoogle();
+                                      }
+                                    },
+                                    icon: GOOGLE_ICON,
+                                    containercolor: _.isAgreed.value
+                                        ? Colors.white
+                                        : Colors.grey,
+                                    textcolor: Colors.black,
+                                    text: '     Continue With Google',
+                                    route: '/platformsignupPage');
+                              }),
                               SizedBox(height: Get.height * 0.034),
                               Container(
                                 alignment: Alignment.center,

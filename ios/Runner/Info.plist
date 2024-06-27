@@ -19,6 +19,15 @@
 </array>
 <key>NSAppleMusicUsageDescription</key>
 <string>Explain why your app uses Apple Music.</string>
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>my_app_signinwithapple</string>
+        </array>
+    </dict>
+</array>
 <key>NSPhotoLibraryUsageDescription</key>
 <string>Explain why your app uses the photo library.</string>
 <key>NSUserTrackingUsageDescription</key>

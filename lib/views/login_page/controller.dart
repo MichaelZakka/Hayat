@@ -26,37 +26,50 @@ class LoginController extends GetxController {
 
   loginWithApple() {
     try {
-      // authRepo.signupWithApple().then((value) {});
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  loginWithGoogle() async{
-    try {
-      authRepo.signInWithGoogle().then((value)async {
-        print('sssssssssssssssssssssssssssssssssssssssssssss');
-        print('sssssssssssssssssssssssssssssssssssssssssssss');
-        print(value.status);
-        if(value.status == 200){
+      authRepo.signupWithApple().then((value) async {
+        if (value.status == 200) {
           AppStorage.token = value.data["token"];
           await AppStorage.setAuthState(true);
           await AppStorage.saveToken(value.data["token"]);
-          print('sssssssssssssssssssssssssssssssssssssssssssss');
-          updateTokenRequest(value.data["token"]);
-          print('sssssssssssssssssssssssssssssssssssssssssssss');
           await AppStorage.saveUserData(LoginResponse(
-              user: User.fromJson(value.data["user"]),
+              user: User.fromJson(value.data['user']),
               token: value.data["token"]));
-          initController.userData =
-              await AppStorage.getUserInfoFromSharedPreferences() ??
-                  LoginResponse(token: '');
-          print(AppStorage.token);
           initController.isAuthenticated = true.obs;
 
           isLoading();
           Get.offAllNamed('/mainPage');
+        }
+      });
+    } catch (e) {
+      print(e);
+      validation(e.toString(),red);
+    }
+  }
 
+  loginWithGoogle() async {
+    try {
+      authRepo.signInWithGoogle().then((value) async {
+        if (value != null) {
+          if (value.status == 200) {
+            AppStorage.token = value.data["token"];
+            await AppStorage.setAuthState(true);
+            await AppStorage.saveToken(value.data["token"]);
+            print('sssssssssssssssssssssssssssssssssssssssssssss');
+            updateTokenRequest(value.data["token"]);
+            print('sssssssssssssssssssssssssssssssssssssssssssss');
+            await AppStorage.saveUserData(LoginResponse(
+                user: User.fromJson(value.data["user"]),
+                token: value.data["token"]));
+            initController.userData =
+                await AppStorage.getUserInfoFromSharedPreferences() ??
+                    LoginResponse(token: '');
+            initController.isAuthenticated = true.obs;
+
+            isLoading();
+            Get.offAllNamed('/mainPage');
+          }
+        } else {
+          isLoading();
         }
       });
     } catch (e) {

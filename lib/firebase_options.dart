@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDTo978JyhZ-_2IgG3mQ9IqtQ-uRus3wIg',
-    appId: '1:697289806380:android:804cd1d21b39280501f789',
+    appId: '1:697289806380:android:8cdcdf522605f14001f789',
     messagingSenderId: '697289806380',
     projectId: 'hayat-423512',
     storageBucket: 'hayat-423512.appspot.com',
@@ -59,10 +59,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCdw6CuZkT2xi8-Nn89vsocNxYvIcoC_K8',
-    appId: '1:697289806380:ios:e19aef26f75a583601f789',
+    appId: '1:697289806380:ios:55e5d759c361960701f789',
     messagingSenderId: '697289806380',
     projectId: 'hayat-423512',
     storageBucket: 'hayat-423512.appspot.com',
+    androidClientId: '697289806380-vlint868chi1nctdosm67ej6ha1b4b3m.apps.googleusercontent.com',
+    iosClientId: '697289806380-nt205ct6lof85rdb1ja6557cr29e8p4h.apps.googleusercontent.com',
     iosBundleId: 'com.example.hayat',
   );
 }

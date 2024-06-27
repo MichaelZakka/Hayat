@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hayat/data/constant/api_constant.dart';
 import 'package:hayat/data/http/http_client.dart';
 import 'package:hayat/data/models/body/login_body.dart';
 import 'package:hayat/data/models/body/signup_body.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-// import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:hayat/res/colors.dart';
+import 'package:hayat/res/styles.dart';
 
 class AuthRepo {
   MyHttpClient http = MyHttpClient();
@@ -21,71 +23,28 @@ class AuthRepo {
     });
   }
 
-  // Future signupWithApple({List<Scope> scopes = const []}) async {
-  //   final result = await TheAppleSignIn.performRequests(
-  //       [AppleIdRequest(requestedScopes: scopes)]);
-  //   switch (result.status) {
-  //     case AuthorizationStatus.authorized:
-  //       final AppleIdCredential = result.credential!;
-  //       final oAuthProvider = OAuthProvider('apple.com');
-  //       final credential = oAuthProvider.credential(
-  //           idToken: String.fromCharCodes(AppleIdCredential.identityToken!));
-  //       final UserCredential =
-  //           await FirebaseAuth.instance.signInWithCredential(credential);
-  //       final firebaseUser = UserCredential.user!;
-  //       if (scopes.contains(Scope.fullName)) {
-  //         final fullName = AppleIdCredential.fullName;
-  //         if (fullName != null &&
-  //             fullName.givenName != null &&
-  //             fullName.familyName != null) {
-  //           final displayName = '${fullName.givenName} ${fullName.familyName}';
-  //           await firebaseUser.updateDisplayName(displayName);
-  //         }
-  //       }
-  //       return firebaseUser;
-  //     case AuthorizationStatus.error:
-  //       throw PlatformException(
-  //           code: 'ERROR_AUTHORIZATION_DENIED',
-  //           message: result.error.toString());
-
-  //     case AuthorizationStatus.cancelled:
-  //       throw PlatformException(
-  //           code: 'ERROR_ABORTED_BY_USER', message: 'Sign in aborted by user');
-
-  //     default:
-  //       throw UnimplementedError();
-  //   }
-  // }
-
-  Future<UserCredential> signInWithApple() async {
-    final appleCredential = await SignInWithApple.getAppleIDCredential(
-      scopes: [
-        AppleIDAuthorizationScopes.email,
-        AppleIDAuthorizationScopes.fullName,
-      ],
-    );
-
-    final oauthCredential = OAuthProvider("apple.com").credential(
-      idToken: appleCredential.identityToken,
-      accessToken: appleCredential.authorizationCode,
-    );
-
-    return await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+  Future<dynamic> signupWithApple() async {
+    try {
+      final appleProvider = AppleAuthProvider();
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithProvider(appleProvider);
+      print('===========================apple1===========================');
+      print(userCredential);
+      print('===========================apple2===========================');
+      final idToken = await userCredential.user?.getIdToken();
+      print(idToken);
+      print('===========================apple3===========================');
+      return await http.postRequest(APPLE_SIGNUP, {
+        "idToken": idToken,
+        "access_token": userCredential.credential!.accessToken
+      }, {
+        "Accept": "application/json"
+      });
+    } catch (e) {
+      print(e);
+    }
+    return null;
   }
-
-  Future signupWithApple() async {
-    // final appleProvider = AppleAuthProvider();
-    // return await FirebaseAuth.instance.signInWithProvider(appleProvider);
-
-    // final credential = await SignInWithApple.getAppleIDCredential(
-    //             scopes: [
-    //               AppleIDAuthorizationScopes.email,
-    //               AppleIDAuthorizationScopes.fullName,
-    //             ],
-    //           );
-  }
-
-  /////////////////////////////////////////////////////////////////////
 
   Future<dynamic> updateToken(String fcmToken, String token) async {
     print(fcmToken);
@@ -95,29 +54,52 @@ class AuthRepo {
   }
 
   Future signInWithGoogle() async {
-    final GoogleSignInAccount? googleUser =
-        await GoogleSignIn().signIn();
-    print('============================google1============================');
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      print('============================google1============================');
+      print(googleUser);
+      if (googleUser != null) {
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+        print(
+            '============================google2============================');
 
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser!.authentication;
-    print('============================google2============================');
-    AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth!.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    print('============================google3============================');
-    print(credential.accessToken);
+        AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
 
-    return await http.postRequest(
-        GOOGLE_SIGNUP,
-        {"provider": "google", "access_token": "${credential.accessToken}"},
-        {"Accept": "application/json"});
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+        print(
+            '============================google3============================');
+
+        print(credential.accessToken);
+        final userCredential = await http.postRequest(
+            GOOGLE_SIGNUP,
+            {"provider": "google", "access_token": "${credential.accessToken}"},
+            {"Accept": "application/json"});
+
+        return userCredential;
+      } else {
+        print(
+            '============================google4============================');
+      }
+    } on Exception catch (e) {
+      print(e);
+      validation('Network error', red);
+    }
   }
 
-  // Future<UserCredential> signupWithApple() async {
-  //   final appleProvider = AppleAuthProvider();
-  //   print('apple');
-  //   return await FirebaseAuth.instance.signInWithProvider(appleProvider);
-  // }
+  void validation(String message, Color color) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      backgroundColor: color,
+      textColor: Colors.white,
+      timeInSecForIosWeb: 3,
+      fontSize: mediumText,
+    );
+  }
 }

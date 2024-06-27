@@ -156,6 +156,7 @@ class LoginPage extends StatelessWidget {
                       ),
                        AuthPlatformButton(
                         ontap: (){
+                          _.isLoading();
                           _.loginWithApple();
                         },
                           icon: APPLE_ICON,

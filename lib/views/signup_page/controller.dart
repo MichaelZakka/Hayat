@@ -23,6 +23,28 @@ class SignupController extends GetxController {
 
   RxBool isAgreed = false.obs;
 
+  loginWithApple() {
+    try {
+      authRepo.signupWithApple().then((value) async {
+        if (value.status == 200) {
+          AppStorage.token = value.data["token"];
+          await AppStorage.setAuthState(true);
+          await AppStorage.saveToken(value.data["token"]);
+          await AppStorage.saveUserData(LoginResponse(
+              user: User.fromJson(value.data['user']),
+              token: value.data["token"]));
+          initController.isAuthenticated = true.obs;
+
+          isLoading();
+          Get.offAllNamed('/mainPage');
+        }
+      });
+    } catch (e) {
+      print(e);
+      validation(e.toString(), red);
+    }
+  }
+
   void agreeAction() {
     isAgreed.toggle();
     update();
@@ -32,29 +54,29 @@ class SignupController extends GetxController {
     try {
       authRepo.signInWithGoogle().then((value) async {
         print(value);
-        // if (value.status == 200) {
-        //   print(value.message);
-          // authRepo.signInWithGoogle().then((value) async {
-          // if (value.message == 'You have logged in successfully') {
-          //   AppStorage.token = value.data["token"];
-          //   await AppStorage.saveUserData(LoginResponse(
-          //       user: User.fromJson(value.data["user"]),
-          //       token: value.data["token"]));
-          //   initController.userData =
-          //       await AppStorage.getUserInfoFromSharedPreferences() ??
-          //           LoginResponse(token: '');
-          //   print(AppStorage.token);
+        if (value == 200) {
+          AppStorage.token = value.data["token"];
+          await AppStorage.setAuthState(true);
+          await AppStorage.saveToken(value.data["token"]);
+          print('sssssssssssssssssssssssssssssssssssssssssssss');
+          // updateTokenRequest(value.data["token"]);
+          print('sssssssssssssssssssssssssssssssssssssssssssss');
+          await AppStorage.saveUserData(LoginResponse(
+              user: User.fromJson(value.data["user"]),
+              token: value.data["token"]));
+          initController.userData =
+              await AppStorage.getUserInfoFromSharedPreferences() ??
+                  LoginResponse(token: '');
+          initController.isAuthenticated = true.obs;
 
-          //   isLoading();
-
-          //   Get.offAllNamed('/mainPage');
-          // }
-          //   }
-          // });
-          // isLoading();
-        // }
+          isLoading();
+          Get.offAllNamed('/mainPage');
+        } else {
+          isLoading();
+        }
       });
     } catch (e) {
+      isLoading();
       print(e);
     }
   }
