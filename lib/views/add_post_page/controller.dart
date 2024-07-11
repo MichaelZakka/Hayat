@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:hayat/data/models/body/add_post_body.dart';
 import 'package:hayat/data/repository/feeds_repo.dart';
+import 'package:hayat/res/colors.dart';
 import 'package:hayat/res/styles.dart';
 import 'package:hayat/views/feeds_page/controller.dart';
 import 'package:hayat/widgets/popup/custom_popup.dart';
@@ -44,15 +45,19 @@ class AddPostController extends GetxController {
   addPostRequset() {
     feedsRepo
         .addPost(AddPostBody(
-            name: 'testname',
+            name: 'test name',
             location: 's',
             caption: captionController.text,
             image: feedsController.pickedImage))
         .then((value) {
+      print(value.message);
       if (value.message == 'post created successfully') {
         print(value.message);
         isLoading();
         Get.offAllNamed('/mainPage');
+      } else {
+        isLoading();
+        validation(value,red);
       }
     });
   }

@@ -112,7 +112,7 @@ class LoginPage extends StatelessWidget {
                               Get.toNamed('/forgotpasswordPage');
                             },
                             child: Text(
-                              'Forgot YOUR PASSWORD ?',
+                              'Forgot Password ?',
                               style: consttext,
                             )),
                       ),
@@ -123,7 +123,7 @@ class LoginPage extends StatelessWidget {
                         width: double.infinity,
                         containercolor: yellow,
                         textcolor: Colors.black,
-                        text: 'LOGIN',
+                        text: 'Sign in',
                         ontap: () async {
                           if (_loginController.emailController.text.isEmpty) {
                             _loginController.validation(
@@ -148,17 +148,17 @@ class LoginPage extends StatelessWidget {
                       Container(
                           alignment: Alignment.center,
                           child: Text(
-                            'Login with',
+                            'Sign in with',
                             style: mediumtext,
                           )),
                       SizedBox(
                         height: Get.height * 0.015,
                       ),
-                       AuthPlatformButton(
-                        ontap: (){
-                          _.isLoading();
-                          _.loginWithApple();
-                        },
+                      AuthPlatformButton(
+                          ontap: () {
+                            _.isLoading();
+                            _.loginWithApple();
+                          },
                           icon: APPLE_ICON,
                           containercolor: Colors.black,
                           textcolor: Colors.white,
@@ -171,7 +171,6 @@ class LoginPage extends StatelessWidget {
                           ontap: () async {
                             _.isLoading();
                             _.loginWithGoogle();
-
                           },
                           icon: GOOGLE_ICON,
                           containercolor: Colors.white,
@@ -191,12 +190,15 @@ class LoginPage extends StatelessWidget {
                       SizedBox(
                         height: Get.height * 0.01,
                       ),
-                      const AuthButton(
-                          width: double.infinity,
-                          containercolor: Color.fromRGBO(41, 104, 150, 1),
-                          textcolor: Colors.white,
-                          text: 'SIGNUP',
-                          route: '/signupPage'),
+                       AuthButton(
+                        width: double.infinity,
+                        containercolor: Color.fromRGBO(41, 104, 150, 1),
+                        textcolor: Colors.white,
+                        text: 'Signup',
+                        ontap: () {
+                          Get.toNamed('/signupPage');
+                        },
+                      ),
                       SizedBox(
                         height: Get.height * 0.05,
                       )

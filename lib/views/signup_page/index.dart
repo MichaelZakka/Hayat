@@ -98,7 +98,7 @@ class SignupPage extends StatelessWidget {
                               Container(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  'Email Address*',
+                                  'Email*',
                                   style: consttext,
                                 ),
                               ),
@@ -143,37 +143,38 @@ class SignupPage extends StatelessWidget {
                                           _.agreeAction();
                                         },
                                       ),
-                                      Text(
-                                        'By continuing You agree to Hayat ',
-                                        style: smalltext1,
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Agreement to ',
+                                            style: smalltext1,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Get.toNamed(
+                                                  '/termsconditionsPage');
+                                            },
+                                            child: Text(
+                                              'Terms & conditions',
+                                              style: smalltext2,
+                                            ),
+                                          ),
+                                          Text(
+                                            ' & ',
+                                            style: smalltext1,
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                  Row(
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          Get.toNamed('/termsconditionsPage');
-                                        },
-                                        child: Text(
-                                          'Terms & conditions',
-                                          style: smalltext2,
-                                        ),
-                                      ),
-                                      Text(
-                                        ' & ',
-                                        style: smalltext1,
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          Get.toNamed('/privacypoliciesPage');
-                                        },
-                                        child: Text(
-                                          'Privacy Policy.',
-                                          style: smalltext2,
-                                        ),
-                                      ),
-                                    ],
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.toNamed('/privacypoliciesPage');
+                                    },
+                                    child: Text(
+                                      'Privacy Policy.',
+                                      style: smalltext2,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -183,8 +184,7 @@ class SignupPage extends StatelessWidget {
                                       _.isAgreed.value ? yellow : Colors.grey,
                                   textcolor: Colors.black,
                                   width: double.infinity,
-                                  text: 'SIGNUP',
-                                  route: '/platformsignupPage',
+                                  text: 'Signup',
                                   ontap: () {
                                     if (_.isAgreed.value) {
                                       if (!_.emailController.text
@@ -220,23 +220,22 @@ class SignupPage extends StatelessWidget {
                               SizedBox(height: Get.height * 0.02),
                               GetBuilder<SignupController>(builder: (_) {
                                 return GetBuilder<LoginController>(
-                                  builder: (context) {
-                                    return AuthPlatformButton(
-                                        ontap: () {
-                                          if(_.isAgreed.value){
-                                            _.isLoading();
-                                            _.loginWithApple();
-                                          }
-                                        },
-                                        icon: APPLE_ICON,
-                                        containercolor: _.isAgreed.value
-                                            ? Colors.black
-                                            : Colors.grey,
-                                        textcolor: Colors.white,
-                                        text: '     Continue With Apple',
-                                        route: '/platformsignupPage');
-                                  }
-                                );
+                                    builder: (context) {
+                                  return AuthPlatformButton(
+                                      ontap: () {
+                                        if (_.isAgreed.value) {
+                                          _.isLoading();
+                                          _.loginWithApple();
+                                        }
+                                      },
+                                      icon: APPLE_ICON,
+                                      containercolor: _.isAgreed.value
+                                          ? Colors.black
+                                          : Colors.grey,
+                                      textcolor: Colors.white,
+                                      text: '     Continue With Apple',
+                                      route: '/platformsignupPage');
+                                });
                               }),
                               SizedBox(height: Get.height * 0.021),
                               GetBuilder<SignupController>(builder: (_) {
@@ -265,12 +264,11 @@ class SignupPage extends StatelessWidget {
                               ),
                               SizedBox(height: Get.height * 0.01),
                               const AuthButton(
-                                  containercolor:
-                                      Color.fromRGBO(41, 104, 150, 1),
-                                  textcolor: Colors.white,
-                                  text: 'LOGIN',
-                                  width: double.infinity,
-                                  route: '/loginPage'),
+                                containercolor: Color.fromRGBO(41, 104, 150, 1),
+                                textcolor: Colors.white,
+                                text: 'Sign in',
+                                width: double.infinity,
+                              ),
                               SizedBox(
                                 height: Get.height * 0.05,
                               )

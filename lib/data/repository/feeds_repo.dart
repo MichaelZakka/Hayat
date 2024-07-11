@@ -40,7 +40,7 @@ class FeedsRepo {
         await http1.MultipartFile.fromPath('image', '${addPostBody.image}'));
     request.headers.addAll({
       'Accept': 'application/json',
-      'Authorization': 'Bearer ${AppStorage.token}'
+      'Authorization': 'Bearer ${await AppStorage.getToken()}'
     });
 
     final response = await request.send();

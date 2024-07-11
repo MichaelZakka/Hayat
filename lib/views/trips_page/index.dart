@@ -68,12 +68,12 @@ class TripsPage extends StatelessWidget {
                                 ? 435.r * initController.trips.data!.length
                                 : 365.r * initController.trips.data!.length,
                             width: Get.width * 0.86,
-                            child: initController.isTripsReady.value
+                            child: !initController.isTripsReady.value
                                 ? GetBuilder<TripsController>(builder: (_) {
                                     return ListView.builder(
                                         controller: _.scrollController,
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
+                                        // physics:
+                                        //     const NeverScrollableScrollPhysics(),
                                         itemCount:
                                             initController.trips.data!.length,
                                         itemBuilder: (context, int index) {

@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hayat/controller/app_storage.dart';
 import 'package:hayat/controller/dependency_injection.dart';
-import 'package:hayat/controller/firebase_api.dart';
 import 'package:hayat/controller/init_controller.dart';
 import 'package:hayat/firebase_options.dart';
 import 'package:hayat/init_binding.dart';
@@ -20,7 +19,7 @@ void main() async {
   // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
   //     .then((_)async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseApi().initNotification();
+  // await FirebaseApi().initNotification();
   // await FirebaseMessaging.instance.subscribeToTopic('General');
   NetworkBinding.init();
 

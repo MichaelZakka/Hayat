@@ -24,7 +24,6 @@ import 'package:hayat/data/repository/trips_repo.dart';
 import 'package:hayat/res/colors.dart';
 import 'package:hayat/res/styles.dart';
 
-
 class InitController extends GetxController {
   LoginResponse? userData = LoginResponse();
   PageRepo pageRepo = PageRepo();
@@ -66,8 +65,6 @@ class InitController extends GetxController {
         ads = AdsResponse.fromJson(value.data);
         isAdsReady.toggle();
         update();
-        print(' isAdsReady.value');
-        print(isAdsReady.value);
       }
     });
   }
@@ -95,14 +92,16 @@ class InitController extends GetxController {
   }
 
   getGalleryImagesRequest() {
-    print('object');
-    galleryRpeo.getGalleryImages('1').then((value) {
-      if (value.status == 200) {
-        print('gallery');
-        GalleryReady();
-        images = GalleryResponse.fromJson(value.data);
-      }
-    });
+    try {
+      galleryRpeo.getGalleryImages('1').then((value) {
+        if (value.status == 200) {
+          GalleryReady();
+          images = GalleryResponse.fromJson(value.data);
+        }
+      });
+    } catch (e) {
+      print('gallery $e');
+    }
   }
 
   getContactUsRequest() {
@@ -117,6 +116,7 @@ class InitController extends GetxController {
     pageRepo.getTeamMembers(id).then((value) {
       if (value.status == 200) {
         teamMembers = TeamMembersResponse.fromJson(value.data);
+        print('team members');
       }
     });
   }
@@ -133,7 +133,6 @@ class InitController extends GetxController {
     tripsRepo.getAllTrips('1').then((value) {
       if (value.status == 200) {
         tripsReady();
-        print('all trips');
         trips = TripsResponse.fromJson(value.data);
       }
     });
@@ -144,11 +143,12 @@ class InitController extends GetxController {
             ConnectivityResult.wifi ||
         await _networkController.get().checkConnectivity() ==
             ConnectivityResult.mobile) {
+              print("initial Data");
       getGalleryImagesRequest();
       getPagesContentRequest();
       getContactUsRequest();
       getSponsersRequest();
-      getTeamMembersRequest('1');
+      // getTeamMembersRequest('1');
       getAllTrips();
       getAdsRequest();
       userData = await AppStorage.getUserInfoFromSharedPreferences();
@@ -163,8 +163,6 @@ class InitController extends GetxController {
     if (await AppStorage.getAuthState()) {
       String fcmToken = await firebaseApi.getFCMToken();
       authRepo.updateToken(fcmToken, userData!.token!).then((value) {
-        print("value.status");
-        print(value.status);
       });
     }
   }
@@ -179,8 +177,6 @@ class InitController extends GetxController {
   void onInit() async {
     getInitialData();
     updateToken();
-    print('await AppStorage.getToken()');
-    print(await AppStorage.getToken());
 
     super.onInit();
   }

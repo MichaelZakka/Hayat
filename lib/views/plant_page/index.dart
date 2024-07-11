@@ -167,6 +167,12 @@ class PlantPage extends StatelessWidget {
                     SizedBox(height: Get.height * 0.025),
                     PlantDetail(
                       color: themecolor(),
+                      info: '${plant!.environment}',
+                      title: 'Environment',
+                    ),
+                    SizedBox(height: Get.height * 0.025),
+                    PlantDetail(
+                      color: themecolor(),
                       info: '${plant!.leafShape}',
                       title: 'Leaf Shape',
                     ),

@@ -21,6 +21,7 @@ class PostReportPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> reasons = [
+      'Content',
       'Graphic Violence',
       'Hateful or abusive content',
       'Improper content rating',

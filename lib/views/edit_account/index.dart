@@ -36,7 +36,12 @@ class EditAccountPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: Get.height * 0.12),
+                      SizedBox(height: Get.height * 0.08),
+                      Text(
+                        '${_.emailController.text}',
+                        style: mediumtext,
+                      ),
+                      SizedBox(height: Get.height * 0.025),
                       Text(
                         'Full name',
                         style: consttext,

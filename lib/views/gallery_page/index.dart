@@ -36,7 +36,12 @@ class GalleryPage extends StatelessWidget {
                       ),
                       SizedBox(height: Get.height * 0.05),
                       CircleButton(
-                          icon: GALLERY_ICON, width: 150.r, onTap: () {}),
+                        icon: GALLERY_ICON,
+                        width: 150.r,
+                        onTap: () {
+                          print(initController.isGalleryReady);
+                        },
+                      ),
                       AuthButton(
                         containercolor: yellow,
                         textcolor: black,
@@ -60,9 +65,9 @@ class GalleryPage extends StatelessWidget {
                             initController.images.data!.length / 3;
                         return SizedBox(
                             height: MediaQuery.of(context).size.width > 450
-                                ? 230.r* heightOfGrid.ceil()
+                                ? 230.r * heightOfGrid.ceil()
                                 : 140.r * heightOfGrid.ceil(),
-                            child: _.isGalleryReady.value
+                            child: !_.isGalleryReady.value
                                 ? CustomGalleryWidget()
                                 : Center(
                                     child: CircularProgressIndicator(

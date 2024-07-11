@@ -85,31 +85,37 @@ class OurTeamPage extends StatelessWidget {
                       SizedBox(
                         height: Get.height * 0.05,
                       ),
-                      SizedBox(
-                        height: 224.r * initController.teamMembers.data!.length,
-                        child: GetBuilder<OurTeamController>(builder: (_) {
-                          return ListView.builder(
-                              controller: _.scrollController,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount:
+                      initController.teamMembers.data!.isNotEmpty
+                          ? SizedBox(
+                              height: 224.r *
                                   initController.teamMembers.data!.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: CircleButton(
-                                    icon: initController
-                                        .teamMembers.data![index].picture!,
-                                    width: 150.r,
-                                    onTap: () {},
-                                    text1:
-                                        '${initController.teamMembers.data![index].fullName}',
-                                    textstyle: materialfont,
-                                  ),
-                                );
-                                // SizedBox(height: Get.height * 0.05),;
-                              });
-                        }),
-                      ),
+                              child:
+                                  GetBuilder<OurTeamController>(builder: (_) {
+                                return ListView.builder(
+                                    controller: _.scrollController,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemCount:
+                                        initController.teamMembers.data!.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: CircleButton(
+                                          icon: initController.teamMembers
+                                              .data![index].picture!,
+                                          width: 150.r,
+                                          onTap: () {},
+                                          text1:
+                                              '${initController.teamMembers.data![index].fullName}',
+                                          textstyle: materialfont,
+                                        ),
+                                      );
+                                      // SizedBox(height: Get.height * 0.05),;
+                                    });
+                              }),
+                            )
+                          : SizedBox()
                       // CircleButton(
 
                       //   icon: TEAM_MEMBER_ICON,

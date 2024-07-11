@@ -56,7 +56,7 @@ class CircleButton extends StatelessWidget {
           ),
           istext
               ? SizedBox(
-                  width: Get.width * 0.3,
+                  // width: Get.width * 0.3,
                   child: Center(
                     child: Text(
                       textAlign: TextAlign.center,

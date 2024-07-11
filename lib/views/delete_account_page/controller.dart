@@ -7,11 +7,6 @@ import 'package:hayat/views/post_report_page/widgets/report_radio.dart';
 import 'package:hayat/widgets/buttons/auth_custom_botton.dart';
 
 class DeleteAccountController extends GetxController {
-
-
-  
-
-  
   Widget reportPopup(BuildContext context) {
     return Scaffold(
       body: Column(
@@ -88,11 +83,14 @@ class DeleteAccountController extends GetxController {
                           SizedBox(
                             height: Get.height * 0.035,
                           ),
-                          const AuthButton(
-                              containercolor: Color.fromRGBO(249, 224, 76, 1),
-                              textcolor: Colors.black,
-                              text: 'SUBMIT',
-                              route: '/'),
+                          AuthButton(
+                            containercolor: Color.fromRGBO(249, 224, 76, 1),
+                            textcolor: Colors.black,
+                            text: 'SUBMIT',
+                            ontap: () {
+                              Get.offAllNamed('/');
+                            },
+                          ),
                           SizedBox(
                             height: Get.height * 0.035,
                           ),
